@@ -1,7 +1,5 @@
-#include "mainwindow.h"
 #include <QApplication>
 #include <QLabel>
-#include <QTimer>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
@@ -16,7 +14,7 @@ int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
     auto *window = new QWidget;
-    window->setWindowTitle("Changed bits counter");
+    window->setWindowTitle("Stenographic inserter");
     window->showMaximized();
     QApplication::processEvents();
     window->setFixedSize(window->size());
@@ -24,8 +22,8 @@ int main(int argc, char *argv[]){
     auto *tabWidget = new QTabWidget(window);
     auto *tab1 = new QWidget();
     auto *tab2 = new QWidget();
-    tabWidget->addTab(tab1, "Container insertion");
-    tabWidget->addTab(tab2, "Low bit pictures comparison");
+    tabWidget->addTab(tab1, "Creating stegocontainer");
+    tabWidget->addTab(tab2, "Comparing low-bit images");
 
     auto *layoutContainers = new QHBoxLayout(window);
     auto *labelContainer = new QLabel;
@@ -43,8 +41,8 @@ int main(int argc, char *argv[]){
 
     auto *layoutH0 = new QHBoxLayout(window);
     auto *openContainerButton = new QPushButton("Open container (.bmp)", window);
-    auto *openMsgButton = new QPushButton("Open embedded message (.bmp)", window);
-    auto *invaseMsgButton = new QPushButton("Invase message into container", window);
+    auto *openMsgButton = new QPushButton("Open message (.bmp)", window);
+    auto *invaseMsgButton = new QPushButton("Insert message", window);
     invaseMsgButton->setEnabled(false);
     layoutH0->addWidget(openContainerButton);
     layoutH0->addWidget(openMsgButton);
@@ -115,11 +113,14 @@ int main(int argc, char *argv[]){
     inserter->setStegocontainerPath(projectDirPath);
 
     bool isContainerOpened = false, isMsgOpened = false;
-    QString pathContainer = "", pathContainerPrevious = "";
-    QObject::connect(openContainerButton, &QPushButton::clicked, [&pathContainer, &pathContainerPrevious, labelContainer, invaseMsgButton, labelContainerWritableBitsValue, labelContainerChangedBitsValue,
-                                                            labelContainerChangedBitsPercentageValue, labelContainerLowBit, &isContainerOpened, &isMsgOpened, inserter, &projectDirPath]{
+    QString pathContainer = "",
+        pathContainerPrevious = "",
+        pathStegocontainer = "",
+        pathStegocontainerPrevious = "";
+    QObject::connect(openContainerButton, &QPushButton::clicked, [&pathContainer, &pathContainerPrevious, labelStegocontainer, labelContainer, invaseMsgButton, labelContainerWritableBitsValue, labelContainerChangedBitsValue,
+                                                                  labelContainerChangedBitsPercentageValue, labelStegocontainerLowBit, labelContainerLowBit, &isContainerOpened, &isMsgOpened, inserter, &pathStegocontainer]{
         pathContainer = QFileDialog::getOpenFileName(nullptr,
-                                               "Open .bmp",
+                                               "Open .bmp container",
                                                "C:/",
                                                "Media files (*.bmp)");
 
@@ -141,6 +142,11 @@ int main(int argc, char *argv[]){
 
                 labelContainerChangedBitsValue->setText("");
                 labelContainerChangedBitsPercentageValue->setText("");
+                labelStegocontainerLowBit->clear();
+                if (invaseMsgButton->isEnabled()){
+                    QPixmap pixmapMsg(pathStegocontainer);
+                    labelStegocontainer->setPixmap(pixmapMsg.scaled(labelStegocontainer->size(), Qt::KeepAspectRatio));
+                }
 
                 QPixmap pixmapContainer(pathContainer);
                 labelContainer->setPixmap(pixmapContainer.scaled(labelContainer->size(), Qt::KeepAspectRatio));
@@ -153,6 +159,7 @@ int main(int argc, char *argv[]){
 
                 labelContainerWritableBitsValue->setText(QString::number(inserter->getContainerAvailableRGBBits()));
 
+
                 isContainerOpened = true;
                 if (isContainerOpened && isMsgOpened){
                     invaseMsgButton->setEnabled(true);
@@ -161,11 +168,10 @@ int main(int argc, char *argv[]){
         }
     });
 
-    QString pathStegocontainer = "", pathStegocontainerPrevious = "";
-    QObject::connect(openMsgButton, &QPushButton::clicked, [&pathStegocontainer, &pathStegocontainerPrevious, labelStegocontainer, invaseMsgButton, labelMsgBitsValue, labelContainerChangedBitsValue,
-                                                            labelContainerChangedBitsPercentageValue, &isMsgOpened, &isContainerOpened, inserter]{
+    QObject::connect(openMsgButton, &QPushButton::clicked, [&pathStegocontainer, &pathStegocontainerPrevious, labelStegocontainer, invaseMsgButton, labelMsgBitsValue,
+                                                            labelContainerChangedBitsValue, labelContainerChangedBitsPercentageValue, &isMsgOpened, &isContainerOpened, inserter]{
         pathStegocontainer = QFileDialog::getOpenFileName(nullptr,
-                                               "Open .bmp",
+                                               "Open .bmp message",
                                                "C:/",
                                                "Media files (*.bmp)");
 
@@ -203,13 +209,13 @@ int main(int argc, char *argv[]){
     });
 
     QObject::connect(invaseMsgButton, &QPushButton::clicked, [labelContainerChangedBitsValue, labelContainerChangedBitsPercentageValue,
-                                                              labelStegocontainer, labelStegocontainerLowBit, inserter, &pathStegocontainer, &pathContainer]{
+                                                              labelStegocontainer, labelStegocontainerLowBit, inserter, &pathContainer]{
         inserter->setContainer(pathContainer.toStdString());
 
         if (inserter->getContainerAvailableRGBBits() < inserter->getMsgRGBBits()){
             QMessageBox errorMessageBox;
             errorMessageBox.setText("Message has bigger size than the container!");
-            std::string errorInfo = "Message size:  " + std::to_string(inserter->getMsgRGBBits()) + " bits\nContainer size: " + std::to_string(inserter->getContainerAvailableRGBBits()) + " bits";
+            std::string errorInfo = "Message size:\t" + std::to_string(inserter->getMsgRGBBits()) + " bits\nContainer size:\t" + std::to_string(inserter->getContainerAvailableRGBBits()) + " bits";
             errorMessageBox.setInformativeText(errorInfo.c_str());
             errorMessageBox.setIcon(QMessageBox::Critical);
             errorMessageBox.exec();
