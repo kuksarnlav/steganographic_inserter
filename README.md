@@ -2,7 +2,7 @@
 ## Used Technologies & Software
 - GUI framework: [***Qt***](https://www.qt.io/ "Visit Qt framework webpage")
 - External library: [***EasyBMP***](https://easybmp.sourceforge.net/ "Visit library webpage")
-- CMake, qmake
+- CMake, QMake
 - CLion 2022.2
 ## Project Properies & Structure
 Project is used to insert bmp-pictures into another bmp-container secretly. Program sequentially writes bits of R, G and B component of the secret message into low bits of B, R and G component of the container. Program calculates the quantity of available bits in the RGB layers of the container, quantity of RGB bits of the message and number with percentage of changed bits while inserting as the user uses the program. Project has both console and GUI version of the program.
