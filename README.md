@@ -57,6 +57,6 @@ Current instruction is about installation and running the program in Qt Creator.
 4. Choose Desktop Qt 6.8.0 MinGW 64-bit compiler in ***Configure Project*** section, click ***Configure Project***
 5. After that actions you would be able to run project as usual
 
-### Application
+### App
 
 3. Double click ***stenographic_inserter.exe*** in ***stenographic_inserter_app*** folder
