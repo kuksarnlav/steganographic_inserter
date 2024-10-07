@@ -48,7 +48,7 @@ Current instruction is about installation and running the program in CLion IDE.
 
 3. Open stenographic_inserter_backend folder via CLion
 4. Click OK in Open Project Wizard window
-5. After that actions you would be able to run project as usual (don't forget to fill your bmp files paths in main.cpp)
+5. After that actions you would be able to run project as usual (don't forget to enter your own .bmp files' paths in main.cpp of backend project, otherwise error will happen)
 
 ### GUI program
 Current instruction is about installation and running the program in Qt Creator.
@@ -56,3 +56,7 @@ Current instruction is about installation and running the program in Qt Creator.
 3. Open stenographic_inserter.pro file via Qt Creator
 4. Choose Desktop Qt 6.8.0 MinGW 64-bit compiler in ***Configure Project*** section, click ***Configure Project***
 5. After that actions you would be able to run project as usual
+
+### Application
+
+3. Double click ***stenographic_inserter.exe*** in ***stenographic_inserter_app*** folder
