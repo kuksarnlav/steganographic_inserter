@@ -16,17 +16,23 @@ Project already has downloaded and unarchived EasyBMP library without example pr
 
 GUI of the program is fullscreen fixed size window with 2 tabs.
 ### Tabs:
-1. ***Container Insertion*** is tab with basic functional for creating stegocontainer, some values which characterize container, message and stegocontainer are provided in this tab too
-2. ***Low bit pictures comparison*** is tab with low bit pictures of container and stegocontainer that are put next to each other
+1. ***Creating Stegocontainer*** is tab with basic functional for creating stegocontainer, some values which characterize container, message and stegocontainer are provided in this tab too
+2. ***Comparing low-bit images*** is tab with low bit pictures of container and stegocontainer that are put next to each other
 
-***Low bit pictures comparison*** tab has only 2 picture labels of low bit container and stegocontainer, left for container and right for stegocontainer, so let's pass to the first tab.
+***Comparing low-bit images*** tab has only 2 picture labels of low bit container and stegocontainer, left for container and right for stegocontainer, so let's pass to the first tab.
 
-***Container Insertion*** tab has 3 functional buttons, 2 picture labels and 4 labels with important values.
+![Image description](photos-for-github/Container-Stegocontainer-Low-Bit.png)
+
+***Creating Stegocontainer*** tab has 3 functional buttons, 2 picture labels and 4 labels with important values.
+
+![Image description](photos-for-github/Container-Message.png)
+
+![Image description](photos-for-github/Container-Stegocontainer.png)
 
 ### Buttons:
-1. ***Open container (.bmp)*** calls a dialog menu in file explorer to choose container, when container is chosen picture is put into left picture label. In addition, this button also creates low bit image of the container and puts it into left picture label in the ***Low bit pictures comparison*** tab
-2. ***Open embedded message (.bmp)*** also calls similar dialog menu and puts selected picture into the right picture label, after that it makes binary file with all RGB bits, which will be used for insertion
-3. ***Invase message into container*** isn't active until the message and container are selected, otherwise button is clickable and after click message picture changes to stegocontainer picture. After all it creates low bit image of the stegocontainer and inserts it into right image label in the ***Low bit pictures comparison*** tab
+1. ***Open container (.bmp)*** button calls a dialog menu in file explorer to choose container, when container is chosen picture is put into left picture label. In addition, this button also creates low bit image of the container and puts it into left picture label in the ***Low bit pictures comparison*** tab
+2. ***Open message (.bmp)*** button also calls similar dialog menu and puts selected picture into the right picture label, after that it makes binary file with all RGB bits, which will be used for insertion
+3. ***Insert message*** button isn't active until the message and container are selected, otherwise button is clickable and after click message picture changes to stegocontainer picture. After all it creates low bit image of the stegocontainer and inserts it into right image label in the ***Low bit pictures comparison*** tab
 
 ### Value Labels:
 1. ***Container available RGB bits*** shows how many container bits of RGB pixels can be used for writing the message RGB
