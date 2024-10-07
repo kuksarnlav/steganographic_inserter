@@ -19,15 +19,13 @@ GUI of the program is fullscreen fixed size window with 2 tabs.
 1. ***Creating Stegocontainer*** is tab with basic functional for creating stegocontainer, some values which characterize container, message and stegocontainer are provided in this tab too
 2. ***Comparing low-bit images*** is tab with low bit pictures of container and stegocontainer that are put next to each other
 
-***Comparing low-bit images*** tab has only 2 picture labels of low bit container and stegocontainer, left for container and right for stegocontainer, so let's pass to the first tab.
-
-![Image description](photos-for-github/Container-Stegocontainer-Low-Bit.png)
-
 ***Creating Stegocontainer*** tab has 3 functional buttons, 2 picture labels and 4 labels with important values.
 
 ![Image description](photos-for-github/Container-Message.png)
 
-![Image description](photos-for-github/Container-Stegocontainer.png)
+***Comparing low-bit images*** tab has only 2 picture labels of low bit container and stegocontainer, left for container and right for stegocontainer, so let's pass to the first tab.
+
+![Image description](photos-for-github/Container-Stegocontainer-Low-Bit.png)
 
 ### Buttons:
 1. ***Open container (.bmp)*** button calls a dialog menu in file explorer to choose container, when container is chosen picture is put into left picture label. In addition, this button also creates low bit image of the container and puts it into left picture label in the ***Low bit pictures comparison*** tab
@@ -39,6 +37,8 @@ GUI of the program is fullscreen fixed size window with 2 tabs.
 2. ***Message RGB bits*** shows quantity of message bits in RGB pixels
 3. ***Changed bits*** displays number of changed bits while inserting message binary file 
 4. ***Changed bits percentage*** displays percentage of changed bits in container availiable RGB bits
+
+![Image description](photos-for-github/Container-Stegocontainer.png)
 
 ## Installation & Running
 ### GUI program
