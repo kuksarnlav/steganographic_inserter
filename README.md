@@ -1,4 +1,4 @@
-# Stenographic Inserter
+# Steganographic Inserter
 ## Used Technologies & Software
 - GUI framework: [***Qt***](https://www.qt.io/ "Visit Qt framework webpage")
 - External library: [***EasyBMP***](https://easybmp.sourceforge.net/ "Visit library webpage")
