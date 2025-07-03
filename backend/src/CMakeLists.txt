@@ -7,11 +7,15 @@ add_executable(Stenographic_Tool_Backend
         ${INCLUDE_DIR}/MethodLSB.h
         ${INCLUDE_DIR}/MethodKutter.h
         ${INCLUDE_DIR}/MethodZhaoKoch.h
+        ${INCLUDE_DIR}/Viewer.h
         ${INCLUDE_DIR}/types.h
+        ${INCLUDE_DIR}/Statistics.h
         main.cpp
         Method.cpp
         MethodLSB.cpp
         MethodKutter.cpp
         MethodZhaoKoch.cpp
+        Viewer.cpp
+        Statistics.cpp
 )
 target_include_directories(Stenographic_Tool_Backend PUBLIC ${INCLUDE_DIR} ${INCLUDE_DIR}/EasyBMP)

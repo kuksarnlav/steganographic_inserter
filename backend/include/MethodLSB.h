@@ -13,13 +13,14 @@ public:
 
     //void extractMessage();
 
-    unsigned char getBitsCheckedContainer() const;
+    static long long getContainerCapacity(const string &inputPathContainer, unsigned char bitsChecked);
+    static long long getMessageWeight(const string &inputPathMessage);
 
 protected:
-    const string nameBinaryMessageFileConsecutive = "message.bin",
-                 nameBinaryMessageFileSeparateR = "messageR.bin",
-                 nameBinaryMessageFileSeparateG = "messageG.bin",
-                 nameBinaryMessageFileSeparateB = "messageB.bin";
+    const string nameBinaryMessageFileConsecutive = "message.txt",
+                 nameBinaryMessageFileSeparateR = "messageR.txt",
+                 nameBinaryMessageFileSeparateG = "messageG.txt",
+                 nameBinaryMessageFileSeparateB = "messageB.txt";
     LSBType lsbType;
     string insertionSequence;
     unsigned char bitsCheckedContainer;

@@ -4,6 +4,9 @@
 #include <fstream>
 #include <vector>
 #include <thread>
+#include <bitset>
+#include <filesystem>
+#include <algorithm>
 
 void MethodLSB::setLSBType(LSBType type){
     lsbType = type;
@@ -43,38 +46,41 @@ void MethodLSB::setBitsCheckedContainer(unsigned char availableBits){
     bitsCheckedContainer = availableBits;
 }
 
-unsigned char MethodLSB::getBitsCheckedContainer() const{
-    return bitsCheckedContainer;
-}
-
 void MethodLSB::insertMessage(const string &inputPathContainer, const string &inputPathMessage, const string &inputPathDir,
                               LSBType inputLSBType,
                               const string &inputInsertionSequence, unsigned char inputBitsCheckedContainer){
 
-    // Setup data
+    /// Setup inputs
     setPathContainer(inputPathContainer);
+    setContainer(); /// Setup container
     setPathMessage(inputPathMessage);
+    setMessage(); /// Setup message
     setPathDir(inputPathDir);
     setLSBType(inputLSBType);
     setInsertionSequence(inputInsertionSequence);
     setBitsCheckedContainer(inputBitsCheckedContainer);
-    setContainer();
-    setMessage();
 
-    // Checking container capacity
+    /// Exit if message can't be fully inserted
+    /// Available bit planes validness
     int bitsCheckedContainerQuantity = 0;
-    while (inputBitsCheckedContainer){
+    while (inputBitsCheckedContainer) {
         if (inputBitsCheckedContainer & 1) bitsCheckedContainerQuantity++;
         inputBitsCheckedContainer >>= 1;
     }
-    if (getQuantityRGBBitsPicture(container) / 8 * bitsCheckedContainerQuantity < getQuantityRGBBitsPicture(message)){
+    if (getQuantityRGBBitsPicture(container) * bitsCheckedContainerQuantity / 8 < getQuantityRGBBitsPicture(message)){
         cout << "Container capacity is too low!\n"
                 "Container capacity:\t" << getQuantityRGBBitsPicture(container) / 8 * bitsCheckedContainerQuantity
              << "\nMessage capacity:\t" << getQuantityRGBBitsPicture(message) << "\n";
         return;
     }
 
-    // Shared variables
+    /// Byte into string translation table
+    string tableByteIntoStr[256];
+    for (unsigned short num = 0; num < 256; num++){
+        tableByteIntoStr[num] = bitset<8>(num).to_string();
+    }
+
+    /// Shared variables
     string containerSequence,
            messageSequence;
     char bitPosition;
@@ -82,13 +88,22 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
 
     switch (inputLSBType){
         case Consecutive: {
-            vector<char> shifts;
-
-            char messageByte,
-                 bitsReadCounter;
-            int pixelCount,
-                pixelCountMax = message.TellHeight() * message.TellWidth();
             fstream messageFile;
+
+            containerSequence = inputInsertionSequence.substr(0, 3);
+            messageSequence = inputInsertionSequence.substr(3, 3);
+
+            /// Filling vector of shifts
+            vector<char> shifts;
+            bitPosition = 0;
+            tempBitsCheckedContainer = bitsCheckedContainer;
+            while (tempBitsCheckedContainer){
+                if (tempBitsCheckedContainer & 1) shifts.push_back(bitPosition);
+                bitPosition++;
+                tempBitsCheckedContainer >>= 1;
+            }
+            reverse(shifts.begin(), shifts.end());
+            if (shifts.empty()) return;
 
             auto writeMessageToFileConsecutive = [&](fstream &messageFile){
                 int messageHeight = message.TellHeight(), messageWidth = message.TellWidth();
@@ -98,7 +113,7 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
                             for (int y = 0; y < messageHeight; y++){
                                 for (int x = 0; x < messageWidth; x++){
                                     RGBApixel *pPixel = message(x, y);
-                                    messageFile << pPixel->Red;
+                                    messageFile << tableByteIntoStr[pPixel->Red];
                                 }
                             }
                             break;
@@ -107,7 +122,7 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
                             for (int y = 0; y < messageHeight; y++){
                                 for (int x = 0; x < messageWidth; x++){
                                     RGBApixel *pPixel = message(x, y);
-                                    messageFile << pPixel->Green;
+                                    messageFile << tableByteIntoStr[pPixel->Green];
                                 }
                             }
                             break;
@@ -116,7 +131,7 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
                             for (int y = 0; y < messageHeight; y++){
                                 for (int x = 0; x < messageWidth; x++){
                                     RGBApixel *pPixel = message(x, y);
-                                    messageFile << pPixel->Blue;
+                                    messageFile << tableByteIntoStr[pPixel->Blue];
                                 }
                             }
                             break;
@@ -126,73 +141,49 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
                 }
             };
             auto writeFileIntoContainerConsecutive = [&](fstream &messageFile){
-                for (char color : containerSequence){
-                    pixelCount = 0;
-                    switch (color){
+                char messageByte;
+                for (char color : containerSequence) {
+                    switch (color) {
                         case 'R': {
                             for (int y = 0; y < stegocontainer.TellHeight(); y++){
                                 for (int x = 0; x < stegocontainer.TellWidth(); x++){
-                                    bitsReadCounter = 0;
                                     RGBApixel *pPixel = stegocontainer(x, y);
-                                    for (char shift : shifts){
-                                        if (bitsReadCounter == 0 || bitsReadCounter == 8){
-                                            if (messageFile.eof()) return;
-                                            messageFile.read(&messageByte, 1);
-                                            bitsReadCounter = 0;
-                                        }
+                                    for (char shift : shifts) {
+                                        if (messageFile.eof()) return;
+                                        messageFile.read(&messageByte, 1);
                                         pPixel->Red &= ~(1 << shift);
-                                        pPixel->Red |= messageByte & (1 << shift);
-                                        bitsReadCounter++;
+                                        pPixel->Red |= ((messageByte - '0') << shift);
                                     }
-                                    pixelCount++;
-                                    if (pixelCount == pixelCountMax) goto exitR;
                                 }
                             }
-                            exitR:
                             break;
                         }
                         case 'G': {
                             for (int y = 0; y < stegocontainer.TellHeight(); y++){
                                 for (int x = 0; x < stegocontainer.TellWidth(); x++){
-                                    bitsReadCounter = 0;
                                     RGBApixel *pPixel = stegocontainer(x, y);
-                                    for (char shift : shifts){
-                                        if (bitsReadCounter == 0 || bitsReadCounter == 8){
-                                            if (messageFile.eof()) return;
-                                            messageFile.read(&messageByte, 1);
-                                            bitsReadCounter = 0;
-                                        }
+                                    for (char shift : shifts) {
+                                        if (messageFile.eof()) return;
+                                        messageFile.read(&messageByte, 1);
                                         pPixel->Green &= ~(1 << shift);
-                                        pPixel->Green |= messageByte & (1 << shift);
-                                        bitsReadCounter++;
+                                        pPixel->Green |= ((messageByte - '0') << shift);
                                     }
-                                    pixelCount++;
-                                    if (pixelCount == pixelCountMax) goto exitG;
                                 }
                             }
-                            exitG:
                             break;
                         }
                         case 'B': {
                             for (int y = 0; y < stegocontainer.TellHeight(); y++){
                                 for (int x = 0; x < stegocontainer.TellWidth(); x++){
-                                    bitsReadCounter = 0;
                                     RGBApixel *pPixel = stegocontainer(x, y);
-                                    for (char shift : shifts){
-                                        if (bitsReadCounter == 0 || bitsReadCounter == 8){
-                                            if (messageFile.eof()) return;
-                                            messageFile.read(&messageByte, 1);
-                                            bitsReadCounter = 0;
-                                        }
+                                    for (char shift : shifts) {
+                                        if (messageFile.eof()) return;
+                                        messageFile.read(&messageByte, 1);
                                         pPixel->Blue &= ~(1 << shift);
-                                        pPixel->Blue |= messageByte & (1 << shift);
-                                        bitsReadCounter++;
+                                        pPixel->Blue |= ((messageByte - '0') << shift);
                                     }
-                                    pixelCount++;
-                                    if (pixelCount == pixelCountMax) goto exitB;
                                 }
                             }
-                            exitB:
                             break;
                         }
                         default: return;
@@ -200,41 +191,37 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
                 }
             };
 
-            // Creating and initializing message.bin
-            messageSequence = inputInsertionSequence.substr(3, 3);
-            messageFile.open(nameBinaryMessageFileConsecutive, ios::out | ios::binary);
+            /// Creating and initializing message.txt
+            messageFile.open(nameBinaryMessageFileConsecutive, ios::in | ios::out | ios::app);
             if (!messageFile.is_open()){
                 cout << "Problem with opening " << nameBinaryMessageFileConsecutive << "!\n";
                 return;
             }
+            /// Filling file with message
             writeMessageToFileConsecutive(messageFile);
+
+            messageFile.clear();
+            messageFile.seekg(0, ios::beg);
+
+            /// Creating and initializing stegocontainer
+            setStegocontainer();
+
+            /// Writing message into container
+            writeFileIntoContainerConsecutive(messageFile);
+
             messageFile.close();
 
-            // Creating and initializing stegocontainer
-            containerSequence = inputInsertionSequence.substr(0, 3); // Opening message file
-            setStegocontainer(); //stegocontainer = container;
-            messageFile.open(nameBinaryMessageFileConsecutive, ios::in | ios::binary);
-            if (!messageFile.is_open()){
-                cout << "Problem with opening " << nameBinaryMessageFileConsecutive << "!\n";
-                return;
-            }
-            bitPosition = 0; // Filling vector of shifts
-            tempBitsCheckedContainer = bitsCheckedContainer;
-            while (tempBitsCheckedContainer){
-                if (tempBitsCheckedContainer & 1) shifts.push_back(bitPosition);
-                bitPosition++;
-                tempBitsCheckedContainer >>= 1;
-            }
-            if (shifts.empty()) return;
-            writeFileIntoContainerConsecutive(messageFile);
-            messageFile.close();
-            stegocontainer.WriteToFile(pathStegocontainer.c_str()); // Creating stegocontainer picture
+            /// Creating stegocontainer picture
+            stegocontainer.WriteToFile(pathStegocontainer.c_str());
+
+            /// Deleting secondary file
+            filesystem::path filepath = nameBinaryMessageFileConsecutive;
+            if (filesystem::exists(filepath)) filesystem::remove(filepath);
+
             break;
         }
         case Separate: {
-            vector<char> shiftsR,
-                         shiftsG,
-                         shiftsB;
+            vector<char> shifts;
 
             containerSequence += inputInsertionSequence[0];
             containerSequence += inputInsertionSequence[2];
@@ -243,244 +230,147 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
             messageSequence += inputInsertionSequence[3];
             messageSequence += inputInsertionSequence[5];
 
-            fstream messageFileR,
-                    messageFileG,
-                    messageFileB;
-
-            /// Functions for inserting message color component into container color component
-            auto writeMessageToFileSeparateR = [&](fstream &messageFileR){
-                int messageHeight = message.TellHeight(), messageWidth = message.TellWidth();
-                for (int y = 0; y < messageHeight; y++){
-                    for (int x = 0; x < messageWidth; x++){
-                        RGBApixel *pPixel = message(x, y);
-                        messageFileR << pPixel->Red;
-                    }
-                }
-            };
-            auto writeMessageToFileSeparateG = [&](fstream &messageFileG){
-                int messageHeight = message.TellHeight(), messageWidth = message.TellWidth();
-                for (int y = 0; y < messageHeight; y++){
-                    for (int x = 0; x < messageWidth; x++){
-                        RGBApixel *pPixel = message(x, y);
-                        messageFileG << pPixel->Green;
-                    }
-                }
-            };
-            auto writeMessageToFileSeparateB = [&](fstream &messageFileB){
-                int messageHeight = message.TellHeight(), messageWidth = message.TellWidth();
-                for (int y = 0; y < messageHeight; y++){
-                    for (int x = 0; x < messageWidth; x++){
-                        RGBApixel *pPixel = message(x, y);
-                        messageFileB << pPixel->Blue;
-                    }
-                }
-            };
-
-            /// Functions for inserting message color components into container color components
-            const int   pixelRCountMax = message.TellHeight() * message.TellWidth(),
-                        pixelGCountMax = pixelRCountMax,
-                        pixelBCountMax = pixelRCountMax;
-            auto writeFileIntoContainerSeparateR = [&](fstream &messageFileR){
-                int pixelRCount = 0;
-                const int   stegocontainerHeight = stegocontainer.TellHeight(),
-                            stegocontainerWidth = stegocontainer.TellWidth();
-                char messageByte,
-                     bitsReadCounter;
-                for (int y = 0; y < stegocontainerHeight; y++){
-                    for (int x = 0; x < stegocontainerWidth; x++){
-                        bitsReadCounter = 0;
-                        RGBApixel *pPixel = stegocontainer(x, y);
-                        for (char shift : shiftsR){
-                            if (bitsReadCounter == 0 || bitsReadCounter == 8){
-                                if (messageFileR.eof()) return;
-                                messageFileR.read(&messageByte, 1);
-                                bitsReadCounter = 0;
-                            }
-                            pPixel->Red &= ~(1 << shift);
-                            pPixel->Red |= messageByte & (1 << shift);
-                            bitsReadCounter++;
-                        }
-                        pixelRCount++;
-                        if (pixelRCount == pixelRCountMax) return;
-                    }
-                }
-            };
-            auto writeFileIntoContainerSeparateG = [&](fstream &messageFileG){
-                int pixelGCount = 0,
-                    stegocontainerHeight = stegocontainer.TellHeight(),
-                    stegocontainerWidth = stegocontainer.TellWidth();
-                char messageByte,
-                     bitsReadCounter;
-                for (int y = 0; y < stegocontainerHeight; y++){
-                    for (int x = 0; x < stegocontainerWidth; x++){
-                        bitsReadCounter = 0;
-                        RGBApixel *pPixel = stegocontainer(x, y);
-                        for (char shift : shiftsG){
-                            if (bitsReadCounter == 0 || bitsReadCounter == 8){
-                                if (messageFileG.eof()) return;
-                                messageFileG.read(&messageByte, 1);
-                                bitsReadCounter = 0;
-                            }
-                            pPixel->Green &= ~(1 << shift);
-                            pPixel->Green |= messageByte & (1 << shift);
-                            bitsReadCounter++;
-                        }
-                        pixelGCount++;
-                        if (pixelGCount == pixelGCountMax) return;
-                    }
-                }
-            };
-            auto writeFileIntoContainerSeparateB = [&](fstream &messageFileB){
-                int pixelBCount = 0,
-                    stegocontainerHeight = stegocontainer.TellHeight(),
-                    stegocontainerWidth = stegocontainer.TellWidth();
-                char messageByte,
-                     bitsReadCounter;
-                for (int y = 0; y < stegocontainerHeight; y++){
-                    for (int x = 0; x < stegocontainerWidth; x++){
-                        bitsReadCounter = 0;
-                        RGBApixel *pPixel = stegocontainer(x, y);
-                        for (char shift : shiftsB){
-                            if (bitsReadCounter == 0 || bitsReadCounter == 8){
-                                if (messageFileB.eof()) return;
-                                messageFileB.read(&messageByte, 1);
-                                bitsReadCounter = 0;
-                            }
-                            pPixel->Blue &= ~(1 << shift);
-                            pPixel->Blue |= messageByte & (1 << shift);
-                            bitsReadCounter++;
-                        }
-                        pixelBCount++;
-                        if (pixelBCount == pixelBCountMax) return;
-                    }
-                }
-            };
-
+            fstream messageFile;
 
             // Filling vector of shifts
             bitPosition = 0;
             tempBitsCheckedContainer = bitsCheckedContainer;
             while (tempBitsCheckedContainer){
-                if (tempBitsCheckedContainer & 1) shiftsR.push_back(bitPosition);
+                if (tempBitsCheckedContainer & 1) shifts.push_back(bitPosition);
                 bitPosition++;
                 tempBitsCheckedContainer >>= 1;
             }
-            if (shiftsR.empty()) return;
-            shiftsG = shiftsR;
-            shiftsB = shiftsR;
+            if (shifts.empty()) return;
+            reverse(shifts.begin(), shifts.end());
 
-            messageFileR.open(nameBinaryMessageFileSeparateR, ios::out | ios::binary);
-            messageFileG.open(nameBinaryMessageFileSeparateG, ios::out | ios::binary);
-            messageFileB.open(nameBinaryMessageFileSeparateB, ios::out | ios::binary);
-            if (!messageFileR.is_open()){
+            auto writeMessageToFile = [&](){
+                for (const char color : messageSequence){
+                    switch (color){
+                        case 'R': {
+                            for (int y = 0; y < message.TellHeight(); y++){
+                                for (int x = 0; x < message.TellWidth(); x++){
+                                    const RGBApixel *pPixel = message(x, y);
+                                    messageFile << tableByteIntoStr[pPixel->Red];
+                                }
+                            }
+                            break;
+                        }
+                        case 'G': {
+                            for (int y = 0; y < message.TellHeight(); y++){
+                                for (int x = 0; x < message.TellWidth(); x++){
+                                    const RGBApixel *pPixel = message(x, y);
+                                    messageFile << tableByteIntoStr[pPixel->Green];
+                                }
+                            }
+                            break;
+                        }
+                        case 'B': {
+                            for (int y = 0; y < message.TellHeight(); y++){
+                                for (int x = 0; x < message.TellWidth(); x++){
+                                    const RGBApixel *pPixel = message(x, y);
+                                    messageFile << tableByteIntoStr[pPixel->Blue];
+                                }
+                            }
+                            break;
+                        }
+                        default: return;
+                    }
+                }
+            };
+            auto writeMessageIntoContainer = [&](){
+                char messageByte;
+                const int colorChannelPixels = message.TellWidth() * message.TellHeight();
+                int countPixels = 0;
+                for (const char colorContainer : containerSequence){
+                    switch (colorContainer){
+                        case 'R':{
+                            countPixels = 0;
+                            for (int y = 0; y < stegocontainer.TellHeight(); y++){
+                                for (int x = 0; x < stegocontainer.TellWidth(); x++){
+                                    if (countPixels == colorChannelPixels) goto exitR;
+                                    RGBApixel *pPixel = stegocontainer(x, y);
+                                    for (const char shift : shifts){
+                                        if (messageFile.eof()) return;
+                                        messageFile.read(&messageByte, 1);
+                                        pPixel->Red &= ~(1 << shift);
+                                        pPixel->Red |= ((messageByte - '0') << shift);
+                                    }
+                                    countPixels++;
+                                }
+                            }
+                            exitR:
+                            break;
+                        }
+                        case 'G':{
+                            countPixels = 0;
+                            for (int y = 0; y < stegocontainer.TellHeight(); y++){
+                                for (int x = 0; x < stegocontainer.TellWidth(); x++){
+                                    if (countPixels == colorChannelPixels) goto exitG;
+                                    RGBApixel *pPixel = stegocontainer(x, y);
+                                    for (const char shift : shifts){
+                                        if (messageFile.eof()) return;
+                                        messageFile.read(&messageByte, 1);
+                                        pPixel->Green &= ~(1 << shift);
+                                        pPixel->Green |= ((messageByte - '0') << shift);
+                                    }
+                                    countPixels++;
+                                }
+                            }
+                            exitG:
+                            break;
+                        }
+                        case 'B':{
+                            countPixels = 0;
+                            for (int y = 0; y < stegocontainer.TellHeight(); y++){
+                                for (int x = 0; x < stegocontainer.TellWidth(); x++){
+                                    if (countPixels == colorChannelPixels) goto exitB;
+                                    RGBApixel *pPixel = stegocontainer(x, y);
+                                    for (const char shift : shifts){
+                                        if (messageFile.eof()) return;
+                                        messageFile.read(&messageByte, 1);
+                                        pPixel->Blue &= ~(1 << shift);
+                                        pPixel->Blue |= ((messageByte - '0') << shift);
+                                    }
+                                    countPixels++;
+                                }
+                            }
+                            exitB:
+                            break;
+                        }
+                        default: break;
+                    }
+                }
+            };
+
+            messageFile.open("messageFile.txt", ios::out);
+            if (!messageFile.is_open()){
                 cout << "Problem with opening " << nameBinaryMessageFileSeparateR << "!\n";
                 return;
             }
-            if (!messageFileG.is_open()){
-                cout << "Problem with opening " << nameBinaryMessageFileSeparateG << "!\n";
-                return;
-            }
-            if (!messageFileB.is_open()){
-                cout << "Problem with opening " << nameBinaryMessageFileSeparateB << "!\n";
-                return;
-            }
 
-            /// Multithreaded file fulfilling
-            writeMessageToFileSeparateR(messageFileR);
-            writeMessageToFileSeparateG(messageFileG);
-            writeMessageToFileSeparateB(messageFileB);
+            /// File fulfilling
+            writeMessageToFile();
 
-            messageFileR.close();
-            messageFileG.close();
-            messageFileB.close();
+            messageFile.close();
 
             setStegocontainer();
 
+            messageFile.clear();
+            messageFile.seekg(0, ios::beg);
 
-            messageFileR.open(nameBinaryMessageFileSeparateR, ios::in | ios::binary);
-            messageFileG.open(nameBinaryMessageFileSeparateG, ios::in | ios::binary);
-            messageFileB.open(nameBinaryMessageFileSeparateB, ios::in | ios::binary);
-            if (!messageFileR.is_open()){
+            messageFile.open("messageFile.txt", ios::in);
+
+            if (!messageFile.is_open()){
                 cout << "Problem with opening " << nameBinaryMessageFileSeparateR << "!\n";
                 return;
             }
-            if (!messageFileG.is_open()){
-                cout << "Problem with opening " << nameBinaryMessageFileSeparateG << "!\n";
-                return;
-            }
-            if (!messageFileB.is_open()){
-                cout << "Problem with opening " << nameBinaryMessageFileSeparateB << "!\n";
-                return;
-            }
 
-
-            /// Multithreaded insertion
-            vector<thread> threads;
-            for (size_t i = 0; i < containerSequence.size(); i++){
-                switch (containerSequence[i]){
-                    case 'R':{
-                        switch (messageSequence[i]){
-                            case 'R':{
-                                threads.emplace_back(writeFileIntoContainerSeparateR, ref(messageFileR));
-                                break;
-                            }
-                            case 'G':{
-                                threads.emplace_back(writeFileIntoContainerSeparateR, ref(messageFileG));
-                                break;
-                            }
-                            case 'B': {
-                                threads.emplace_back(writeFileIntoContainerSeparateR, ref(messageFileB));
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                    case 'G':{
-                        switch (messageSequence[i]){
-                            case 'R':{
-                                threads.emplace_back(writeFileIntoContainerSeparateG, ref(messageFileR));
-                                break;
-                            }
-                            case 'G':{
-                                threads.emplace_back(writeFileIntoContainerSeparateG, ref(messageFileG));
-                                break;
-                            }
-                            case 'B': {
-                                threads.emplace_back(writeFileIntoContainerSeparateG, ref(messageFileB));
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                    case 'B': {
-                        switch (messageSequence[i]){
-                            case 'R':{
-                                threads.emplace_back(writeFileIntoContainerSeparateB, ref(messageFileR));
-                                break;
-                            }
-                            case 'G':{
-                                threads.emplace_back(writeFileIntoContainerSeparateB, ref(messageFileG));
-                                break;
-                            }
-                            case 'B': {
-                                threads.emplace_back(writeFileIntoContainerSeparateB, ref(messageFileB));
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-
-            /// Waiting threads to finish
-            for (auto &t : threads){
-                if (t.joinable()) t.join();
-            }
+            writeMessageIntoContainer();
 
             /// Closing files
-            messageFileR.close();
-            messageFileG.close();
-            messageFileB.close();
+            messageFile.close();
+
+            filesystem::remove("messageFile.txt");
 
             /// Creating stegocontainer picture
             stegocontainer.WriteToFile(pathStegocontainer.c_str());
@@ -488,4 +378,22 @@ void MethodLSB::insertMessage(const string &inputPathContainer, const string &in
         }
         default: return;
     }
+}
+
+long long MethodLSB::getContainerCapacity(const string &inputPathContainer, unsigned char bitsChecked){
+    if (bitsChecked == 0) return 0;
+    BMP img;
+    img.ReadFromFile(inputPathContainer.c_str());
+    long long bitsCheckedCount = 0;
+    while (bitsChecked){
+        if (bitsChecked & 1) bitsCheckedCount++;
+        bitsChecked >>= 1;
+    }
+	return (long long)img.TellHeight() * (long long)img.TellWidth() * 3 * bitsCheckedCount / 8;
+}
+
+long long MethodLSB::getMessageWeight(const string &inputPathMessage){
+    BMP img;
+    img.ReadFromFile(inputPathMessage.c_str());
+    return (long long)img.TellHeight() * (long long)img.TellWidth() * 3;
 }

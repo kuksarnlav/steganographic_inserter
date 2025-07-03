@@ -24,18 +24,15 @@ private slots:
 
 	void on_actionUploadContainer_triggered();
 	void on_actionUploadMessage_triggered();
-	void on_actionModeInsertion_triggered();
-	void on_actionModeExtraction_triggered();
 	void on_actionMethodLSBConsecutive_triggered();
 	void on_actionMethodLSBSeparate_triggered();
 	void on_actionMethodKutter_triggered();
 	void on_actionMethodZhaoKoch_triggered();
-	void on_actionViewAllBitPlanes_triggered();
-	void on_actionViewOneBitPlane_triggered();
 
 	void on_pushButtonInsert_clicked();
+	void on_actionUploadViewImage_triggered();
 
-	void on_pushButtonUpdate_clicked();
+	void on_pushButtonView_clicked();
 
 private:
 	Ui::MainWindow *ui;
@@ -55,11 +52,11 @@ protected:
 	void disableLayoutWidgets(QVBoxLayout* l);
 
 	bool canShowInsertButton();
-	bool canShowUpdateButton();
+	bool canShowViewButton();
 
 	QString pathContainer;
 	QString pathMessage;
 	QString pathStegocontainer;
-	QString pathViewImage;
+	QString pathView;
 };
 #endif // MAINWINDOW_H

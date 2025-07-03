@@ -11,11 +11,24 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    backend/include/EasyBMP/EasyBMP.cpp
+    backend/include/EasyBMP/EasyBMP.cpp \
+    backend/src/Method.cpp \
+    backend/src/MethodKutter.cpp \
+    backend/src/MethodLSB.cpp \
+    backend/src/MethodZhaoKoch.cpp \
+    backend/src/Viewer.cpp \
+    backend/src/Statistics.cpp
 
 HEADERS += \
     mainwindow.h \
-    backend/include/EasyBMP/EasyBMP.h
+    backend/include/EasyBMP/EasyBMP.h \
+    backend/include/Method.h \
+    backend/include/MethodKutter.h \
+    backend/include/MethodLSB.h \
+    backend/include/MethodZhaoKoch.h \
+    backend/include/types.h \
+    backend/include/Viewer.h \
+    backend/src/Statistics.h
 
 FORMS += \
     mainwindow.ui

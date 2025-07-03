@@ -17,6 +17,7 @@ public:
     void setMessage();
     void setStegocontainer();
 
+    string getNameStegocontainer();
     unsigned char getBitsCheckedViewPicture() const;
 
     static int getQuantityRGBBitsPicture(BMP &picture);
@@ -28,8 +29,7 @@ protected:
 
     string pathContainer,
            pathMessage,
-           pathStegocontainer,
-           pathViewPicture;
+           pathStegocontainer;
 
     BMP container,
         message,
@@ -40,5 +40,4 @@ protected:
     void setPathContainer(const string &path);
     void setPathMessage(const string &path);
     void setPathDir(const string &pathDir);
-    void setBitsCheckedViewPicture(unsigned char inputBitsCheckedViewPicture);
 };

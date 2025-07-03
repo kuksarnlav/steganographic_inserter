@@ -10,7 +10,9 @@ void Method::setPathDir(const string &pathDir){
     pathStegocontainer = pathDir + nameStegocontainer;
 }
 
-
+string Method::getNameStegocontainer(){
+    return nameStegocontainer;
+}
 string Method::getPathContainer(){
     return pathContainer;
 }
@@ -50,8 +52,4 @@ void Method::setStegocontainer(){
 
 unsigned char Method::getBitsCheckedViewPicture() const{
     return bitsCheckedViewPicture;
-}
-
-void Method::setBitsCheckedViewPicture(unsigned char inputBitsCheckedViewPicture) {
-    bitsCheckedViewPicture = inputBitsCheckedViewPicture;
 }

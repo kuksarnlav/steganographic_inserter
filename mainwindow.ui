@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1368</width>
-    <height>626</height>
+    <height>694</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -27,6 +27,19 @@
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QHBoxLayout" name="hLayoutMethodLSB">
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item>
            <layout class="QVBoxLayout" name="vLayoutLSBVariant">
             <item>
@@ -41,22 +54,17 @@
               <item>
                <widget class="QComboBox" name="comboBoxSepContainer1">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -76,6 +84,12 @@
               </item>
               <item>
                <widget class="QLabel" name="labelSepArrow1">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>10</width>
@@ -93,22 +107,17 @@
               <item>
                <widget class="QComboBox" name="comboBoxSepMessage1">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -142,22 +151,20 @@
               <item>
                <widget class="QComboBox" name="comboBoxSepContainer2">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>1</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -177,6 +184,12 @@
               </item>
               <item>
                <widget class="QLabel" name="labelSepArrow2">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>10</width>
@@ -194,22 +207,20 @@
               <item>
                <widget class="QComboBox" name="comboBoxSepMessage2">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>1</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -243,22 +254,20 @@
               <item>
                <widget class="QComboBox" name="comboBoxSepContainer3">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>2</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -278,6 +287,12 @@
               </item>
               <item>
                <widget class="QLabel" name="labelSepArrow3">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>10</width>
@@ -295,22 +310,20 @@
               <item>
                <widget class="QComboBox" name="comboBoxSepMessage3">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>2</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -334,6 +347,12 @@
              <layout class="QHBoxLayout" name="hLayoutMethodLSBCon">
               <item>
                <widget class="QLabel" name="labelConContainer">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string>Container bit channel sequence:</string>
                 </property>
@@ -349,15 +368,10 @@
                <widget class="QComboBox" name="comboBoxConContainer1">
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -379,15 +393,13 @@
                <widget class="QComboBox" name="comboBoxConContainer2">
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>1</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -409,15 +421,13 @@
                <widget class="QComboBox" name="comboBoxConContainer3">
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>2</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -437,6 +447,12 @@
               </item>
               <item>
                <widget class="QLabel" name="labelArrow">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="minimumSize">
                  <size>
                   <width>10</width>
@@ -459,6 +475,12 @@
               </item>
               <item>
                <widget class="QLabel" name="labelConMessage">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <property name="text">
                  <string>Message bit channel sequence:</string>
                 </property>
@@ -471,15 +493,10 @@
                <widget class="QComboBox" name="comboBoxConMessage1">
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -501,15 +518,13 @@
                <widget class="QComboBox" name="comboBoxConMessage2">
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>1</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -531,15 +546,13 @@
                <widget class="QComboBox" name="comboBoxConMessage3">
                 <property name="minimumSize">
                  <size>
-                  <width>40</width>
+                  <width>35</width>
                   <height>0</height>
                  </size>
                 </property>
-                <item>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </item>
+                <property name="currentIndex">
+                 <number>2</number>
+                </property>
                 <item>
                  <property name="text">
                   <string>R</string>
@@ -562,6 +575,22 @@
            </layout>
           </item>
           <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="hLayoutMethodLSBBits">
             <item>
              <widget class="QLabel" name="labelLSBBits">
@@ -572,7 +601,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>; Available container bits:</string>
+               <string>Available container bits:</string>
               </property>
              </widget>
             </item>
@@ -708,16 +737,48 @@
               <property name="text">
                <string>0</string>
               </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="hLayoutMethodKutter">
-          <item alignment="Qt::AlignmentFlag::AlignHCenter">
-           <widget class="QLabel" name="labelKutter">
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <spacer name="horizontalSpacerKutterLeft">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelKutterInsertionPower">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -725,16 +786,272 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Kutter</string>
+             <string>Insertion power:</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxKutterInsertionPower">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelKutterContainer">
+            <property name="text">
+             <string>Container channel sequence:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxKutterContainerChannel1">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxKutterContainerChannel2">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxKutterContainerChannel3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>←</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignmentFlag::AlignRight">
+           <widget class="QLabel" name="labelKutterMessage">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Message channel sequence:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxKutterMessageChannel1">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxKutterMessageChannel2">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxKutterMessageChannel3">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerKutterRight">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="hLayoutMethodZhaoKoch">
-          <item alignment="Qt::AlignmentFlag::AlignHCenter">
-           <widget class="QLabel" name="labelZhaoKoch">
+          <item>
+           <spacer name="horizontalSpacerZhaoLeft">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelZhao1stCoef">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -742,9 +1059,338 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Zhao-Koch</string>
+             <string>1st DCT coefficient: </string>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBoxZhao1stCoefX">
+            <property name="maximum">
+             <number>7</number>
+            </property>
+            <property name="value">
+             <number>4</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBoxZhao1stCoefY">
+            <property name="maximum">
+             <number>7</number>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerZhaoCoef">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelZhao2ndCoef">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>2nd DCT coefficient: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBoxZhao2ndCoefX">
+            <property name="maximum">
+             <number>7</number>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBoxZhao2ndCoefY">
+            <property name="maximum">
+             <number>7</number>
+            </property>
+            <property name="value">
+             <number>4</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerZhaoCoefMessage">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Threshold:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinBoxZhaoThreshold">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>10</number>
+            </property>
+            <property name="value">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelZhaoContainerSequence">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Container channel sequence:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxZhaoContainerChannel1">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxZhaoContainerChannel2">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxZhaoContainerChannel3">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>←</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+           <widget class="QLabel" name="labelZhaoMessageSequence">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Message channel sequence:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxZhaoMessageChannel1">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxZhaoMessageChannel2">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxZhaoMessageChannel3">
+            <property name="minimumSize">
+             <size>
+              <width>35</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>R</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>G</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerZhaoRight">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -760,16 +1406,6 @@
             </property>
             <property name="text">
              <string>Insert</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonExtract">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Extract</string>
             </property>
            </widget>
           </item>
@@ -807,6 +1443,202 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab3">
+       <attribute name="title">
+        <string>Stegocontainer and Statistics</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QHBoxLayout" name="hLayoutStatistics">
+          <item>
+           <spacer name="horizontalSpacerLeft">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelContainerBit1Percentage">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Container bit &quot;1&quot; percentage:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelContainerBit1PercentageValue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerContainerMessage">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelMessageBit1Percentage">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Message bit &quot;1&quot; percentage:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelMessageBit1PercentageValue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerMessageStegocontainer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStegocontainerBit1Percentage">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Stegocontainer bit &quot;1&quot; percentage:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelStegocontainerBit1PercentageValue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerStegocontainerChangedBits">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelChangedBitsQuantity">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Changed bits percentage:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelChangedBitsQuantityValue">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerRight">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelStegocontainer">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="tab2">
        <attribute name="title">
         <string>View</string>
@@ -834,6 +1666,12 @@
            <widget class="QLabel" name="labelViewOnePlane">
             <property name="enabled">
              <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="text">
              <string>Image bit plane:</string>
@@ -987,6 +1825,74 @@
            </widget>
           </item>
           <item>
+           <spacer name="horizontalSpacerViewPlanesChannels">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Policy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Channels:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxViewR">
+            <property name="layoutDirection">
+             <enum>Qt::LayoutDirection::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>R</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxViewG">
+            <property name="layoutDirection">
+             <enum>Qt::LayoutDirection::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>G</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxViewB">
+            <property name="layoutDirection">
+             <enum>Qt::LayoutDirection::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string>B</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="hSpacerRight">
             <property name="orientation">
              <enum>Qt::Orientation::Horizontal</enum>
@@ -1002,12 +1908,28 @@
          </layout>
         </item>
         <item>
+         <widget class="QPushButton" name="pushButtonView">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>View</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="labelView">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
           </property>
           <property name="text">
            <string/>
@@ -1038,7 +1960,6 @@
     <addaction name="actionUploadMessage"/>
     <addaction name="separator"/>
     <addaction name="actionUploadViewImage"/>
-    <addaction name="actionSaveViewImage"/>
    </widget>
    <widget class="QMenu" name="menuMethods">
     <property name="title">
@@ -1054,13 +1975,6 @@
     <addaction name="menuLSB"/>
     <addaction name="actionMethodKutter"/>
     <addaction name="actionMethodZhaoKoch"/>
-   </widget>
-   <widget class="QMenu" name="menuModes">
-    <property name="title">
-     <string>Modes</string>
-    </property>
-    <addaction name="actionModeInsertion"/>
-    <addaction name="actionModeExtraction"/>
    </widget>
    <widget class="QMenu" name="menuEncryption">
     <property name="title">
@@ -1084,9 +1998,16 @@
     <addaction name="menuSymmetric"/>
     <addaction name="menuAsymmetric"/>
    </widget>
+   <widget class="QMenu" name="menuModes">
+    <property name="title">
+     <string>Modes</string>
+    </property>
+    <addaction name="actionModeInsertion"/>
+    <addaction name="actionModeExtraction"/>
+   </widget>
+   <addaction name="menu"/>
    <addaction name="menuModes"/>
    <addaction name="menuMethods"/>
-   <addaction name="menu"/>
    <addaction name="menuEncryption"/>
   </widget>
   <action name="actionUploadContainer">
