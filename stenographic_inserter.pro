@@ -10,19 +10,36 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    stenographic_inserter_backend/src/InserterBMP.cpp \
-    stenographic_inserter_backend/include/EasyBMP/EasyBMP.cpp
+    mainwindow.cpp \
+    backend/include/EasyBMP/EasyBMP.cpp \
+    backend/src/Method.cpp \
+    backend/src/MethodKutter.cpp \
+    backend/src/MethodLSB.cpp \
+    backend/src/MethodZhaoKoch.cpp \
+    backend/src/Viewer.cpp \
+    backend/src/Statistics.cpp
 
 HEADERS += \
-    stenographic_inserter_backend/include/InserterBMP.h \
-    stenographic_inserter_backend/include/EasyBMP/EasyBMP.h
+    mainwindow.h \
+    backend/include/EasyBMP/EasyBMP.h \
+    backend/include/Method.h \
+    backend/include/MethodKutter.h \
+    backend/include/MethodLSB.h \
+    backend/include/MethodZhaoKoch.h \
+    backend/include/types.h \
+    backend/include/Viewer.h \
+    backend/src/Statistics.h
 
-INCLUDEPATH += $$PWD/stenographic_inserter_backend/include
-INCLUDEPATH += $$PWD/stenographic_inserter_backend/include/EasyBMP
+FORMS += \
+    mainwindow.ui
+
+INCLUDEPATH += $$PWD/backend/include
+INCLUDEPATH += $$PWD/backend/include/EasyBMP
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RC_FILE = appIcon.rc
+RESOURCES += \
+    resources.qrc

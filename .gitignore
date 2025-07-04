@@ -1,0 +1,16 @@
+# Ignore directories
+.qtc_clangd/
+build/
+debug/
+release/
+backend/.idea
+backend/cmake-build-debug
+backend/src/.idea
+
+# Ignore files
+.qmake.stash
+Makefile
+Makefile.Debug
+Makefile.Release
+steganographic_inserter.pro.user
+ui_mainwindow.h
