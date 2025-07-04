@@ -13,6 +13,8 @@ The current project is used as a tool for creating steganographic insertions, ob
 Program uses BMP format pictures both for container and message.
 Due to the OOP structure of the project it can be easily presented as a scheme with modules, which is shown on the picture right below.
 
+![](photos-for-github/scheme.png)
+
 Project logically is divided into backend (folder "_backend_") and frontend parts (folder "_steganographic_inserter_").
 
 Backend part consists of several classes:
@@ -44,12 +46,20 @@ Menu has 2 options:
 
 GUI of the program is single window with 3 tabs:
 - "Message and Container". Used for inserting message into container, choosing method settings.
+
+![](photos-for-github/first-tab.png)
 - "Stegocontaienr and Statistics". Used for viewing statistics and stegocontainer.
+
+![](photos-for-github/second-tab.png)
 - "View". Used for visual analysis of stegocontainer color channels and bit planes.
+
+![](photos-for-github/third-tab-0.png)
+![](photos-for-github/third-tab-1.png)
+
 
 ## Installation & Running
 
-1. [***Download ZIP Archive***](https://github.com/kuksarnlav/stenographic_inserter/archive/refs/heads/main.zip "Download stenographic inserter") of the project
+1. [***Download ZIP Archive***](https://github.com/kuksarnlav/steganographic_inserter/archive/refs/heads/main.zip "Download stenographic inserter") of the project
 2. Unpack the archive into your folder destination
 
 ### Console program
